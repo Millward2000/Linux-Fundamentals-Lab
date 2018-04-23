@@ -7,26 +7,28 @@
 # you're doing.
 Vagrant.configure("2") do |config|
 
-  config.vm.define "centos1" do |centos7|
-    centos7.vm.box = "centos/7"
-    centos7.vm.hostname = "centos1"
-    config.ssh.insert_key = false
-    config.vm.provision "shell",
+  config.vm.define "centos1" do |centos1|
+    centos1.vm.box = "centos/7"
+    centos1.vm.hostname = "centos1"
+    centos1.ssh.insert_key = false
+    centos1.vm.provision "shell",
       inline: "sudo sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config"
-    config.vm.provision "shell",
+    centos1.vm.provision "shell",
       inline: "sudo systemctl restart sshd"
-    config.vm.network "private_network", type: "dhcp"  
+    centos1.vm.network "private_network", type: "dhcp"  
+    centos1.vm.network "private_network", type: "dhcp"  
   end
 
-  config.vm.define "centos2" do |centos7|
-    centos7.vm.box = "centos/7"
-    centos7.vm.hostname = "centos2"
-    config.ssh.insert_key = false
-    config.vm.provision "shell",
+  config.vm.define "centos2" do |centos2|
+    centos2.vm.box = "centos/7"
+    centos2.vm.hostname = "centos2"
+    centos2.ssh.insert_key = false
+    centos2.vm.provision "shell",
       inline: "sudo sed -i -e 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config"
-    config.vm.provision "shell",
+    centos2.vm.provision "shell",
       inline: "sudo systemctl restart sshd"
-    config.vm.network "private_network", type: "dhcp"
+    centos2.vm.network "private_network", type: "dhcp"
+    centos2.vm.network "private_network", type: "dhcp"  
   end
 
 end
